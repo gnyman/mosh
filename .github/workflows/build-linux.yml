@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: install build dependencies
-      run: brew install -s --only-dependencies mosh
+      run: apt-get install autoconf automake autopoint debhelper dh-strip-nondeterminism gettext intltool-debian libarchive-cpio-perl libarchive-zip-perl libcroco3 libfile-stripnondeterminism-perl libltdl-dev libmail-sendmail-perl libprotobuf-lite10 libprotoc10 libsys-hostname-long-perl libtimedate-perl libtool m4 po-debconf
     - name: autogen
       run: ./autogen.sh
     - name: configure
