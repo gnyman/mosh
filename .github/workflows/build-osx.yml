@@ -1,13 +1,10 @@
 name: Build for OS X
 
 on:
-  push:
-    branches: [ agent-forwarding-merge-20151128 ]
   pull_request:
-    branches: [ agent-forwarding-merge-20151128 ]
 
 jobs:
-  build:
+  build-10.15:
     runs-on: macos-10.15
     steps:
     - uses: actions/checkout@v2
@@ -27,24 +24,3 @@ jobs:
       with:
         name: mosh-osx.zip
         path: /tmp/foo/mosh-osx.zip
-        
-  build-static:
-    runs-on: macos-10.15
-    steps:
-    - uses: actions/checkout@v2
-    - name: install build dependencies
-      run: brew install -s --only-dependencies mosh
-    - name: autogen
-      run: ./autogen.sh
-    - name: configure
-      run: ./configure --enable-static-libraries --prefix=/tmp/foo/mosh-dist
-    - name: make
-      run: make
-    - name: make install
-      run: make install
-    - name: zip
-      run: cd /tmp/foo/mosh-dist; zip -r ../mosh-static-osx.zip ./
-    - uses: actions/upload-artifact@v2
-      with:
-        name: mosh-static-osx.zip
-        path: /tmp/foo/mosh-static-osx.zip
