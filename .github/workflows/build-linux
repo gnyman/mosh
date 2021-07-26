@@ -1,0 +1,26 @@
+name: Build for Linux
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: install build dependencies
+      run: brew install -s --only-dependencies mosh
+    - name: autogen
+      run: ./autogen.sh
+    - name: configure
+      run: ./configure --prefix=/tmp/foo/mosh-dist
+    - name: make
+      run: make
+    - name: make install
+      run: make install
+    - name: zip
+      run: cd /tmp/foo/mosh-dist; zip -r ../mosh-linux.zip ./
+    - uses: actions/upload-artifact@v2
+      with:
+        name: mosh-linux.zip
+        path: /tmp/foo/mosh-linux.zip
