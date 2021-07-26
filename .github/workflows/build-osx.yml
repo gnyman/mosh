@@ -18,14 +18,14 @@ jobs:
     - name: autogen
       run: ./autogen.sh
     - name: configure
-      run: ./configure --prefix=/home/runner/mosh-dist
+      run: ./configure --prefix=/tmp/foo/mosh-dist
     - name: make
       run: make
     - name: make install
       run: make install
     - name: zip
-      run: cd /home/runner/mosh-dist; zip -r ../mosh-osx.zip ./
+      run: cd /tmp/foo/mosh-dist; zip -r ../mosh-osx.zip ./
     - uses: actions/upload-artifact@v2
       with:
         name: mosh-osx.zip
-        path: /home/runner/mosh-osx.zip
+        path: /tmp/foo/mosh-osx.zip
