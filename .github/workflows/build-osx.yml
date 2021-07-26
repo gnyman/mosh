@@ -13,8 +13,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: install automake
-      run: brew install automake
+    - name: install build dependencies
+      run: brew install -s --only-dependencies mosh
     - name: autogen
       run: ./autogen.sh
     - name: configure
